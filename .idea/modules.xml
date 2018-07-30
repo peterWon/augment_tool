@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/augment.iml" filepath="$PROJECT_DIR$/.idea/augment.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../labelImg/.idea/labelImg.iml" filepath="$PROJECT_DIR$/../labelImg/.idea/labelImg.iml" />
+    </modules>
+  </component>
+</project>
