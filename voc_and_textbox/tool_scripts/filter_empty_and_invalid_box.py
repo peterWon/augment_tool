@@ -84,7 +84,7 @@ def filter_invalid_xml(xml_folder, image_folder,filtered_xml_folder):
     print('Total filtered file number is iou_num %d empty_num  %d.' % (iou_num, empty_num))
 
 if __name__ == '__main__':
-    xml_folder = '/home/wz/DataSets/SYNTH_LINE/VOC2007/Annotations'
-    image_folder = '/home/wz/DataSets/SYNTH_LINE/VOC2007/JPEGImages'
-    filtered_xml_folder = '/home/wz/DataSets/SYNTH_LINE/VOC2007/Annotations_filter'
+    xml_folder = '/home/wz/DataSets/dataforocr-zsm/sfz/front_aug/IDCard-ROI/ROI-CROP/FrontXML'
+    image_folder = '/home/wz/DataSets/dataforocr-zsm/sfz/front_aug/IDCard-ROI/ROI-CROP/Front'
+    filtered_xml_folder = '/home/wz/DataSets/dataforocr-zsm/sfz/front_aug/IDCard-ROI/ROI-CROP/XML'
     filter_invalid_xml(xml_folder, image_folder,filtered_xml_folder)

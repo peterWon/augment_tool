@@ -14,7 +14,7 @@ import multiprocessing as mp
 import cv2 #just for debug
 
 
-aug_mult = 10
+aug_mult = 5
 
 seq = iaa.Sequential([
             iaa.Crop(px=(0, 10)),  # crop images from each side by 0 to 16px (randomly chosen)
@@ -33,7 +33,7 @@ seq = iaa.Sequential([
 
 def augment(xml_):
     base_name = xml_[0:-4]
-    img_name = base_name +'.jpg'
+    img_name = base_name +'.jpeg'
     if not os.path.exists(os.path.join(img_dir, img_name)):
         return
     image = ndimage.imread(os.path.join(img_dir, img_name))
@@ -86,18 +86,18 @@ def augment(xml_):
 
         writer.save(os.path.join(res_xml_dir, base_name + '_' + str(i) + '.xml'))
         writer.clear_bndbox()
-        misc.imsave(os.path.join(res_img_dir, base_name + '_' + str(i) + '.jpg'), image_aug)
+        misc.imsave(os.path.join(res_img_dir, base_name + '_' + str(i) + '.jpeg'), image_aug)
 
     print('augment img %s succesfully!' % xml_)
 
 
 if __name__ == '__main__':
-    xml_dir = '/home/wz/DataSets/LICENCES/invoice_FaPiao/pix2pix/xml'
-    img_dir = '/home/wz/DataSets/LICENCES/invoice_FaPiao/pix2pix/merge'
-    res_xml_dir = '/home/wz/DataSets/LICENCES/invoice_FaPiao/pix2pix/aug_xml'
-    res_img_dir = '/home/wz/DataSets/LICENCES/invoice_FaPiao/pix2pix/aug_img'
+    xml_dir = '/home/wz/DataSets/dataforocr/sfz/front_tbox_xml'
+    img_dir = '/home/wz/DataSets/dataforocr/sfz/front'
+    res_xml_dir = '/home/wz/DataSets/dataforocr/sfz/front_aug/xml'
+    res_img_dir = '/home/wz/DataSets/dataforocr/sfz/front_aug/img'
 
     xmls = os.listdir(xml_dir)
-    pool = mp.Pool(processes = None)
+    pool = mp.Pool(processes = 4)
     pool.map(augment, xmls)
     print('Done!')

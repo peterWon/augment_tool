@@ -9,13 +9,13 @@ from textbox_io import *
 
 def transform_json_to_xml():
     # data root dir includes json file and images.
-    data_root = '/home/wz/DataSets/LICENCES/invoice_FaPiao/pix2pix/merge'
-    save_dir = '/home/wz/DataSets/LICENCES/invoice_FaPiao/pix2pix/xml'
+    data_root = '/home/wz/DataSets/dataforocr/sfz/front'
+    save_dir = '/home/wz/DataSets/dataforocr/sfz/front_tbox_xml'
 
     file_names = os.listdir(data_root)
     for file_name in file_names:
         if file_name.endswith('.json'):
-            image = cv2.imread(os.path.join(data_root, file_name[:-5] + '.jpg'))
+            image = cv2.imread(os.path.join(data_root, file_name[:-5] + '.jpeg'))
             if image is None:
                 continue
             with open(os.path.join(data_root, file_name), 'r') as f:

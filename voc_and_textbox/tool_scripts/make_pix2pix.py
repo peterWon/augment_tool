@@ -38,7 +38,7 @@ def get_pts_on_line(pt1, pt2):
 
 def single_xml_processs(img_name):
     imageA = cv2.imread(os.path.join(imgA_dir, img_name), cv2.IMREAD_COLOR)
-    xml_path = os.path.join(xml_root_dir, img_name[:-4] + '.xml')
+    xml_path = os.path.join(xml_root_dir, img_name[:-5] + '.xml')
     if imageA is None or not os.path.exists(xml_path):
         return
 
@@ -69,7 +69,9 @@ def single_xml_processs(img_name):
 
         for pts in linepts:
             for pt in pts:
-                imageB[pt[1], pt[0]] = 255
+                pt1 = min(pt[1], imageB.shape[0] - 1)
+                pt0 = min(pt[0], imageB.shape[1] - 1)
+                imageB[pt1, pt0] = 255
     # cv2.imshow('a', imageA)
     # cv2.imshow('b', imageB)
     # cv2.waitKey()
@@ -115,8 +117,8 @@ def make_polyline_data():
 
     # for imgname in imgnames:
     #     single_xml_processs(imgname, imga_dir, xml_root_dir,imgb_save_dir)
-    split_trainval('/home/wz/DataSets/CarBrand/border_line/aug/img',
-                   '/home/wz/DeepLearning/pytorch_dir/pytorch-CycleGAN-and-pix2pix-master/datasets/carbrand/A')
+    #split_trainval('/home/wz/DataSets/CarBrand/border_line/aug/img',
+    #               '/home/wz/DeepLearning/pytorch_dir/pytorch-CycleGAN-and-pix2pix-master/datasets/carbrand/A')
 
 def process(name):
     img = cv2.imread(os.path.join(img_src_dir, name), cv2.IMREAD_GRAYSCALE)
@@ -127,15 +129,18 @@ def process(name):
     cv2.imwrite(os.path.join(binary_save_dir, save_name), binary)
 
 if __name__ == '__main__':
-    # split_trainval('/home/wz/DataSets/SYNTH_LINE/VOC2007/pix2pix/Binary',
-    #               '/home/wz/DataSets/SYNTH_LINE/VOC2007/pix2pix/A', 0.01, 0.98, 0.01)
+    split_trainval('/home/wz/DataSets/dataforocr-zsm/sfz/front_aug/imgb',
+                  '/home/wz/DataSets/dataforocr-zsm/sfz/front_aug/B', 0.1, 0.8, 0.1)
 
 
     #make polyline
-    # imgA_dir = '/home/wz/DataSets/LICENCES/invoice_FaPiao/pix2pix/aug_img'
-    # xml_root_dir = '/home/wz/DataSets/LICENCES/invoice_FaPiao/pix2pix/aug_xml'
-    # imgB_save_dir = '/home/wz/DataSets/LICENCES/invoice_FaPiao/pix2pix/aug_img_b'
+    # imgA_dir = '/home/wz/DataSets/dataforocr/sfz/front_aug/img'
+    # xml_root_dir = '/home/wz/DataSets/dataforocr/sfz/front_aug/xml'
+    # imgB_save_dir = '/home/wz/DataSets/dataforocr/sfz/front_aug/imgb'
     # imgnames = os.listdir(imgA_dir)
+    #
+    # for imgname in imgnames:
+    #     single_xml_processs(imgname)
     # l = len(imgnames)
-    # pool = mp.Pool(processes=None)
+    # pool = mp.Pool(processes=4)
     # pool.map(single_xml_processs, imgnames)

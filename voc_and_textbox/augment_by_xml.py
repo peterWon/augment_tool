@@ -26,18 +26,18 @@ import multiprocessing as mp
 
 # 配置增强参数
 seq = iaa.Sequential([
-    iaa.Crop(px=(0, 100)),  # crop images from each side by 0 to 16px (randomly chosen)
+    #iaa.Crop(px=(0, 100)),  # crop images from each side by 0 to 16px (randomly chosen)
     # iaa.Fliplr(0.5),  # horizontally flip 50% of the images
     # iaa.Flipud(0.5),
     iaa.AdditiveGaussianNoise(scale=0.1 * 100),
-    iaa.GaussianBlur(sigma=(0.8, 1.5)),
-    iaa.Affine(rotate=(-2, 2), mode ='edge'),#mode ='edge'代表以边缘像素填充放射变换后的空洞背景
+    iaa.GaussianBlur(sigma=(0.8, 1.2)),
+    #iaa.Affine(rotate=(-2, 2), mode ='edge'),#mode ='edge'代表以边缘像素填充放射变换后的空洞背景
     # iaa.Affine(scale={"x": (0.8, 1.2), "y": (0.8, 1.2)}),
     #            # scale images to 80-120% of their size, individually per axis
     #            translate_px={"x": (-10, 10), "y": (-10, 10)}, mode ='edge'),
-    iaa.Affine(scale=(0.95, 1.0), mode ='edge'),
+    #iaa.Affine(scale=(0.95, 1.0), mode ='edge'),
     # iaa.Affine(shear=(-20, 20), mode ='edge'),
-    iaa.Multiply((0.9, 1.2)),  # change brightness of images (50-150% of original value)
+    iaa.Multiply((0.8, 1.2)),  # change brightness of images (50-150% of original value)
     # iaa.ContrastNormalization((0.8, 1.5))
 ])
 
@@ -83,12 +83,12 @@ def augment(xml_name):
     shutil.copy(os.path.join(img_dir, img_name), os.path.join(res_img_dir, img_name))
 
 if __name__ == '__main__':
-    augment_times = 5
-    voc_dir = "/home/wz/DataSets/LICENCES/ZZJGDMZ/VOC2007/"
-    xml_dir = os.path.join(voc_dir, 'XML')
-    img_dir = os.path.join(voc_dir, 'IMG')
-    res_xml_dir = os.path.join(voc_dir, 'Annotations')
-    res_img_dir = os.path.join(voc_dir, 'JPEGImages')
+    augment_times = 3
+    voc_dir = "/home/wz/DataSets/XKY/VOC-rotate-1280/"
+    xml_dir = os.path.join(voc_dir, 'Annotations')
+    img_dir = os.path.join(voc_dir, 'JPEGImages')
+    res_xml_dir = os.path.join(voc_dir, 'NewAnnotations')
+    res_img_dir = os.path.join(voc_dir, 'NewJPEGImages')
 
     xmls = os.listdir(xml_dir)
     pool = mp.Pool(processes=None)
